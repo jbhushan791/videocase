@@ -1,0 +1,24 @@
+/* .video {
+    margin: 20px;
+} */
+
+.label {
+    margin: 20px;
+    align-items: block;
+    font-size: medium;
+    /* vertical-align: center; */
+    align-content: center;
+    /* align-items: block; */
+}
+
+.topcontent{
+    display: flex;
+}
+
+.home{
+    margin: 20px; 
+}
+
+.navpill{
+    background-color: paleturquoise !important; 
+}

@@ -1,0 +1,89 @@
+/* .video {
+    margin: 20px;
+} */
+
+.label {
+    margin: 20px;
+    align-items: block;
+    font-size: medium;
+    /* vertical-align: center; */
+    align-content: center;
+    /* align-items: block; */
+}
+
+.items{
+    align-content: center;
+}
+
+.top{
+    margin: 20px; 
+}
+
+.filter{
+    margin: 20px;
+    display: flex !important;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.c{
+    width: 400;
+    height: 300;
+}
+
+.bigvideo{
+    /* width: 100%; */
+    /* align-content: center; */
+    /* height: 300px; */
+    display: flex;
+    justify-content: space-around;
+    margin: 20px !important;
+    flex-direction: row;       
+}
+
+.v{
+    width: 70%;
+}
+
+.person{
+    width: 20%;
+    background-color: lightgrey !important;
+    /* float: right; */
+}
+
+.discussion{
+    border-color: lightgray;
+    border-style: solid;
+    border-width: thin;
+    margin-bottom: 1rem;
+}
+
+.bar{
+    display: flex;
+    align-content:space-evenly;
+    flex-direction: row;  
+    margin-bottom: 1em; 
+    
+}
+
+.tag{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;  
+    margin-bottom: 1em; 
+    margin-left: 1em; 
+    text-align: center;
+}
+
+.vbar{
+    display: block;  
+    margin-bottom: 1em; 
+}
+
+.videotitle{
+    /* align-content: center; */
+    align-self: center;
+    font-weight: bold;
+    color: gray;
+}

@@ -1,0 +1,38 @@
+.topnav {
+    overflow: hidden;
+    background-color: DodgerBlue;
+  }
+
+  /* Style the topnav links */
+.topnav button {
+    background-color: inherit;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  
+  /* Change color on hover */
+.topnav button:hover {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.topnav button.active {
+    background-color: #f2f2f2;
+}
+
+.a {
+  margin-bottom:0 !important;
+}
+
+/* .content{
+  display: none;
+} */
+  
