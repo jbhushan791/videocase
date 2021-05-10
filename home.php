@@ -33,30 +33,27 @@
         <a class="nav-link" data-toggle="tab" href="#videolist">Videos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#">Presenter</a>
+        <a class="nav-link" data-toggle="tab" href="#presenter">Presenter</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#">Contact Us</a>
+        <a class="nav-link" data-toggle="tab" href="#contact">Contact Us</a>
       </li>    
     </ul>
   </div> 
-   <!-- Tab panes -->
-   <div class="tab-content">
+  <!-- Tab panes -->
+  <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>
         <?php include 'main.php'; ?>
     </div>
     <div id="videolist" class="container tab-pane fade"><br>
-      <?php include 'videolist.php'; ?>
+        <?php include 'videolist.php'; ?>
     </div>
-    <div id="menu2" class="container tab-pane fade"><br>
-      <h3>Under contruction</h3>
+    <div id="presenter" class="container tab-pane fade"><br>
+        <?php include 'presenter.php'; ?>
     </div>
-    <div id="menu3" class="container tab-pane fade"><br>
-      <h3>Under contruction</h3>
+    <div id="contact" class="container tab-pane fade"><br>
+        <?php include 'contact.php'; ?>
     </div>
   </div>
-</div> 
-<!-- </nav> -->
-<!-- </body> -->
-<?php include 'footer.php'; ?>
+  <?php include 'footer.php'; ?>
 </html>
