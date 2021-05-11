@@ -67,7 +67,10 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- <h4 class="card-title">Video Title 1</h4> -->
-                        <h4 class="card-title"> <a href="/video.php" target="_blank" class="card-title">Video Title 1</a></h4>
+                        <h4 class="card-title"> 
+                            <!-- <a href="/Videocase/video.php" target="_blank" class="card-title">Video Title 1</a> -->
+                            <a href="video.php" target="_blank" class="card-title">Video Title 1</a>
+                        </h4>
                         <video width ="400" height = "300" controls autoplay>
                             <source src="demo.MP4" type="video/mp4">
                         </video>
@@ -80,7 +83,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title"><a href="/video.php" target="_blank" class="card-title">Video Title 2</a></h4>
+                        <h4 class="card-title"><a href="/Videocase/video.php" target="_blank" class="card-title">Video Title 2</a></h4>
                         <video width ="400" height = "300" controls autoplay>
                             <source src="demo.MP4" type="video/mp4">
                         </video>
