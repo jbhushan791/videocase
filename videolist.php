@@ -54,7 +54,7 @@
                                         "Quantitative Reasoning"
                                     ];
                                     foreach ($maths as $key => $val) {
-                                        echo "<li><input type=checkbox id=math+$x name=math+$x value=$x><label for=math+$x> $val</label></li>";
+                                        echo "<li><input type=checkbox id=math+$val name=math+$val value=$val><label for=math+$val> $val</label></li>";
                                     }   
                               ?>
                                 <!-- <li>
@@ -80,7 +80,7 @@
                                         "Engineering"
                                     ];
                                     foreach ($science as $key => $val) {
-                                        echo "<li><input type=checkbox id=s+$x name=s+$x value=$x><label for=s+$x> $val</label></li>";
+                                        echo "<li><input type=checkbox id=s+$val name=s+$val value=$val><label for=s+$val> $val</label></li>";
                                     }   
                               ?>
                             </ul>
@@ -98,7 +98,7 @@
                                         "Python"
                                     ];
                                     foreach ($cs as $key => $val) {
-                                        echo "<li><input type=checkbox id=cs+$x name=cs+$x value=$x><label for=cs+$x> $val</label></li>";
+                                        echo "<li><input type=checkbox id=cs+$val name=cs+$val value=$val><label for=cs+$val> $val</label></li>";
                                     }   
                               ?>
                             </ul>
@@ -114,7 +114,7 @@
                                         "World History & Civilization"
                                     ];
                                     foreach ($ss as $key => $val) {
-                                        echo "<li><input type=checkbox id=ss+$x name=ss+$x value=$x><label for=ss+$x> $val</label></li>";
+                                        echo "<li><input type=checkbox id=ss+$val name=ss+$val value=$val><label for=ss+$val> $val</label></li>";
                                     }   
                               ?>
                             </ul>
@@ -128,7 +128,7 @@
                                         "Spanish"
                                     ];
                                     foreach ($lang as $key => $val) {
-                                        echo "<li><input type=checkbox id=lang+$x name=lang+$x value=$x><label for=lang+$x> $val</label></li>";
+                                        echo "<li><input type=checkbox id=lang+$val name=lang+$val value=$val><label for=lang+$val> $val</label></li>";
                                     }   
                               ?>
                             </ul>
@@ -143,7 +143,7 @@
                                         "Visual Arts"
                                     ];
                                     foreach ($arts as $key => $val) {
-                                        echo "<li><input type=checkbox id=a+$x name=a+$x value=$x><label for=a+$x> $val</label></li>";
+                                        echo "<li><input type=checkbox id=a+$val name=a+$val value=$val><label for=a+$val> $val</label></li>";
                                     }   
                               ?>
                             </ul>
@@ -177,7 +177,7 @@
                             "Pre-K","K", "1","2","3","4","5","6","7","8","9","10","11","12","Undergraduate","Graduate"
                         ];
                         foreach ($grade as $key => $val) {
-                            echo "<li><input type=checkbox id=g+$x name=g+$x value=$x><label for=g+$x> $val</label></li>";
+                            echo "<li><input type=checkbox id=g+$val name=g+$val value=$val><label for=g+$val> $val</label></li>";
                         }   
                     ?>
                 </div>
@@ -198,7 +198,7 @@
                             "Hands-on learning","Jigsaw","Mastery learning","Role play"
                         ];
                         foreach ($strategy as $key => $val) {
-                            echo "<li><input type=checkbox id=s+$x name=s+$x value=$x><label for=s+$x> $val</label></li>";
+                            echo "<li><input type=checkbox id=s+$val name=s+$val value=$val><label for=s+$val> $val</label></li>";
                         }   
                     ?>
                 </div>
@@ -217,7 +217,7 @@
                             "Cold War"
                         ];
                         foreach ($topic as $key => $val) {
-                            echo "<li><input type=checkbox id=top+$x name=top+$x value=$x><label for=top+$x> $val</label></li>";
+                            echo "<li><input type=checkbox id=top+$val name=top+$val value=$val><label for=top+$val> $val</label></li>";
                         }   
                     ?>
                 </div>
@@ -237,7 +237,7 @@
                             "Policymakers"
                         ];
                         foreach ($audience as $key => $val) {
-                            echo "<li><input type=checkbox id=aud+$x name=aud+$x value=$x><label for=aud+$x> $val</label></li>";
+                            echo "<li><input type=checkbox id=aud+$val name=aud+$val value=$val><label for=aud+$val> $val</label></li>";
                         }   
                     ?>
                 </div>
@@ -253,7 +253,7 @@
                             "Case Use already developed units"
                         ];
                         foreach ($types as $key => $val) {
-                            echo "<li><input type=checkbox id=type+$x name=type+$x value=$x><label for=type+$x> $val</label></li>";
+                            echo "<li><input type=checkbox id=type+$val name=type+$val value=$val><label for=type+$val> $val</label></li>";
                         }   
                     ?>
                 </div>
@@ -270,7 +270,7 @@
                             "MCCSC"
                         ];
                         foreach ($inst as $key => $val) {
-                            echo "<li><input type=checkbox id=i+$x name=i+$x value=$x><label for=i+$x> $val</label></li>";
+                            echo "<li><input type=checkbox id=i+$val name=i+$val value=$val><label for=i+$val> $val</label></li>";
                         }   
                     ?>
                 </div>

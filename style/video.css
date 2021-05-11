@@ -52,7 +52,7 @@
     /* float: right; */
 }
 
-.discussion{
+.note{
     border-color: lightgray;
     border-style: solid;
     border-width: thin;
@@ -69,6 +69,10 @@
 
 .container{
     margin-left: inherit !important;
+}
+
+.overview1{
+    display: flex;
 }
 
 .tag{
