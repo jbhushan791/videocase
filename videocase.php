@@ -21,10 +21,10 @@
     <!-- <body> -->
     <div class="jumbotron text-center bg-image a" style="background-image: url('v.jpeg'); margin-bottom:0 ">
         <!-- <h1 class ="text-info"><b>PBL-TECH: Wise Practice Case Construction Tool</b></h1> -->
-        <h1><b>PBL-TECH: Wise Practice Case Construction Tool</b></h1>
+        <h1><b>PBL-TECH</b></h1>
     </div>
     <div>
-        <h1>VIDEO TITLE</h1>
+        <h1>VIDEO CASE NAME</h1>
         <div class="row side">
             <div class="col-sm-2">
                 <div class="card">

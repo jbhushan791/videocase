@@ -112,21 +112,31 @@
             <textarea class="form-control collapse" rows="5" id="note"></textarea>
             <button id="note" type="submit" class="btn btn-outline-secondary btn-sm collapse">Post</button> -->
         </div> 
-        <div class="card person" style="border: cornflowerblue;">
-                <img class="card-img-top" src="image/person.png" alt="Card image">
+        <div>
+            <div>
+                <h6>Related videos</h6>
+            </div>
+            <div class="card">
                 <div class="card-body text-center">
-                    <h4 class="card-title">Presenter Name</h4>
-                    <i style="margin-botton: 10px !important">Presenter occupation</i><br>
-                    <p class="card-text">Presenter Profilr.. work.. some text text text tetx
-                        some text text text tetx some text text text tetx some text text text tetx
-                        some text text text tetx some text text text tetx some text text text tetx
-                        some text text text tetx some text text text tetx some text text text tetx
-                        some text text text tetx some text text text tetx some text text text tetx
-                        some text text text tetx some text text text tetx some text text text tetx
-                        some text text text tetx some text text text tetx some text text text tetx
-                        some text text text tetx some text text text tetx some text text text tetx
-                    </p>
+                    <video width ="200" height = "150" controls autoplay>
+                        <source src="demo.MP4" type="video/mp4">
+                    </video>
                 </div>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+                    <video width ="200" height = "150" controls autoplay>
+                        <source src="demo.MP4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+                    <video width ="200" height = "150" controls autoplay>
+                        <source src="demo.MP4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
         </div>
     </div>
     <!-- </body -->
