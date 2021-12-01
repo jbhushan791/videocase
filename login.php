@@ -1,7 +1,7 @@
 <?php
 	
-    // include_once 'database/database-test.php';
-    include_once 'database/database-local.php';
+    include_once 'db/UserDAO.class.php';
+    $userDAO = new UserDAO();
 
 	$showAlert = false;
 	$showError = false;
@@ -10,40 +10,14 @@
 	$email = $_POST["email"];
 	$pass1 = $_POST["password"];
 
-    // $db = new DB();
-    // $data = $db->login($email, $pass1);
-
-    // echo $data;
-
-    // // Create connection
-    // $servername = "127.0.0.1";
-    // $username = "root";
-    // $password = "123456";
-    // $dbname = "videocase";
-    // $conn = new mysqli($servername, $username, $password,$dbname);
-    // // Check connection
-    // if ($conn->connect_error) {
-    // die("Connection failed: " . $conn->connect_error);
-    // }
-
-   $sql = "SELECT FIRST_NAME, LAST_NAME, EMAIL FROM User WHERE EMAIL = '$email' and PASSWORD = '$pass1'";
-
-   $result = $conn->query($sql);
-
-   //echo $result."<br>";
-
-   if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        //echo $row["FIRST_NAME"]."<br>";
-        //echo $row["LAST_NAME"]."<br>";
-        header("location: home.php"); 
+    if(isset($_POST["submit"])){
+        $result = $userDAO->login($email, $pass1);
+        if($result == "") {
+           
+        } else {
+            header("location: /home.php");
+        }
     }
-  } else {
-    echo "Invalid credential";
-  }
- 
-  $conn->close();
 	
 ?>
 
@@ -74,7 +48,7 @@
                             <input class="form-control placeholder-fix" type="password" placeholder="Password" name="password" required="">
                         </div>
                         <div class="action-button">
-                            <button class="btn-block" type="submit">Login</button> 
+                            <button class="btn-block" type="submit" name="submit">Login</button> 
                         </div>
                     </form>
                 </div>

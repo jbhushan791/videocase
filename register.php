@@ -1,9 +1,8 @@
 <?php
 
-    // include_once 'database/database-test.php';
-    include_once 'database/database-local.php';
-
-	
+    include_once 'db/UserDAO.class.php';
+    $userDAO = new UserDAO();
+       
 	$showAlert = false;
 	$showError = false;
 	$exists=false;
@@ -15,23 +14,15 @@
 	$pass2 = $_POST["pass2"];
     $affiliation = $_POST["affiliation"];
     $description = $_POST["description"];
-    $affiliation = $_POST["user_type"];
+    $user_type = $_POST["user_type"];
 
-
-   $sql = "INSERT INTO User (FIRST_NAME, LAST_NAME, EMAIL,PASSWORD,DESCRIPTION,AFFILIATION)
-           VALUES ('$fname', '$lname','$email','$pass1','$description','$affiliation')";
-
-	if($fname != ""){
-        if ($conn->query($sql) === TRUE) {
-           // echo "New record created successfully";
-           echo "<a href=login.html></a>";
-           //header('Location: login.html');
-          } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-          }
+    if(isset($_POST["submit"])){
+        $result = $userDAO->register($fname, $lname, $email, $pass1, $user_type, $affiliation, $description);
+        if($result == 1) {
+           header("location: /home.php");
+        }
     }
- 
-    $conn->close();
+    
 ?>
 	
 <!DOCTYPE html>
@@ -40,14 +31,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Basic Professional Sign Up Form Free Responsive Widget Template</title>
-
-        <!-- <link rel="icon" href="images/favicon.png"/> -->
-        <!-- Custom styles for this template -->
         <link href="style/register.css" rel="stylesheet">
         <link href="style/bootstrap.min.css" rel="stylesheet">
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script> -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">  
     </head>
     <body class="content">
@@ -89,20 +74,20 @@
                                 <div class="col-xs-12">
                                     <textarea id="description" name="description" class="placeholder-fix form-control"  rows="5" placeholder="Description" ></textarea>
                                 </div>
-                                <div class = "col-xs-12">
-                                     <div class="user-type"> 
-                                         <input type="radio" id="Admin" class="form-check-input" name="user_type" value="Admin">
-                                         <label for="Admin" class="form-check-label">Admin</label>
+                                <div class = "col-xs-12 user-type">
+                                     <div> 
+                                         <input type="radio" id="Admin" name="user_type" value="Admin">
+                                         <label for="Admin" >Admin</label>
                                     </div>
-                                    <div class="user-type">
-                                        <input type="radio" id="User" class="form-check-input" name="user_type" value="User">
-                                        <label for="User" class="form-check-label">User</label>
+                                    <div>
+                                        <input type="radio" id="User" name="user_type" value="User">
+                                        <label for="User" >User</label>
                                     </div>
                                 </div>
                                 
                             </div>
                             <div class="buttons">
-                                <button type="submit" class="btn">Get Started</button>
+                                <button type="submit" name="submit" class="btn">Get Started</button>
                             </div>
                         </form>
                     </div>

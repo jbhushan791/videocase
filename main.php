@@ -3,7 +3,7 @@
     <?php include 'style/home.css'; ?>
 </style>
 <html>
-        <!-- Main Content -->
+<body>   <!-- Main Content -->
         <div class="home">
             <div class = "topcontent">
                 <div class= "video">
@@ -52,4 +52,5 @@
             </div>
         </div>
     <!-- End Content -->
+</body>
 </html> 

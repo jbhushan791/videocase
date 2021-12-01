@@ -26,4 +26,5 @@
 .navigation-bar{
     display: flex;
     justify-content: space-between;
+    position: relative;
 }

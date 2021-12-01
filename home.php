@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style/header.css">
   <style>
   .fakeimg {
     height: 200px;
@@ -16,20 +17,13 @@
   </style>
 </head> 
 <!-- <body> -->
-  <div class="jumbotron text-center bg-image a" style="background-image: url('v.jpeg'); margin-bottom:0 ">
-    <!-- <h1 class ="text-info"><b>PBL-TECH: Wise Practice Case Construction Tool</b></h1> -->
-    <h1><b>PBL-TECH</b></h1>
-    <!-- <div>
-      <a href="login.php"><b>Login</b></a>
-      <a href="register.php"><b>Register</b></a>
-    </div> -->
-  </div>
-  
-<!-- <nav class="navbar navbar-expand-sm bg-info navbar-dark"> -->
-  <!-- <a class="navbar-brand" data-toggle="tab" href="#">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
+<header>
+    <h2>PBL Tech</h1>
+    <div class="top-nav">
+      <a href="login.php">Login</a>
+      <a href="register.php">Register</a>
+    </div>
+</header>
   <div class="navigation-bar">
     <div>
       <ul class="nav nav-pills" role="tablist">
@@ -50,16 +44,6 @@
         </li>   
       </ul>
     </div>
-    <!-- <div>
-      <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#register">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#login">Login</a>
-        </li>
-      </ul>
-    </div> -->
   </div> 
   <!-- Tab panes -->
   <div class="tab-content">
@@ -78,12 +62,6 @@
       <div id="admin" class="container tab-pane fade"><br>
           <?php include 'admin.php'; ?>
       </div>
-      <!-- <div id="register" class="container tab-pane fade"><br>
-         
-      </div>
-      <div id="login" class="container tab-pane fade"><br>
-         
-      </div> -->
   </div>
   <?php include 'footer.php'; ?>
 </html>

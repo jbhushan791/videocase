@@ -64,9 +64,11 @@ ul{list-style: none;}
     width: 100%;
     font-size: 12px;
 }
+
 .user-type {
     display: flex !important;
     gap: 5px;
+    margin-top: 2%;
 }
 .logo h1 {
     color: #fff;
