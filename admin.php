@@ -1,3 +1,16 @@
+<?php
+//include_once 'database/database-test.php';
+include_once 'database/database-local.php';
+
+
+$sql = "SELECT * FROM Videocase ";
+$searchStr = $_POST["searchStr"];
+if($searchStr != ""){
+    $sql = $sql + "where TITLE LIKE '%" .$searchStr. "%'";
+}
+$result = mysqli_query($conn,$sql);
+?>
+
 <!DOCTYPE html>
 <style>
     <?php include 'style/admin.css'; ?>
@@ -14,82 +27,42 @@
         <!-- <div class="create">
             <button type="button" class="btn btn-primary">Create Videocase</button>
         </div> -->
-        <div>
+        <div class="service-section section-tb-padd-100" style="background: #red">
             <div class="hcreate">
                 <h3>Videocases</h3>
                 <a href="createvideocase.php" target="_blank" class="card-title"><button>Add new</button></a>
                 <!-- <button onClick="href='createvideocase.php'" class="btn btn-light">Add new</button> -->
             </div>
-            <input class="form-control" id="myInput" type="text" placeholder="Search for videocases..">
+            <input name="searchStr" class="form-control" id="myInput" type="text" placeholder="Search by title..">
             <br>
-            <table class="table table-bordered table-striped">
-                <tbody id="myTable">
-                <tr>
-                    <td>VideoCase 1</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>VideoCase 2</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>VideoCase 3</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>VideoCase 4</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>VideoCase 5</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>VideoCase 6</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>VideoCase 7</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>VideoCase 8</td>
-                    <td>Sept 2021</td>
-                    <td>
-                        <i class="material-icons" style="color:blue">mode_edit</i>
-                        <i class="material-icons" style="color:blue">delete</i>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
+            <!-- <div class="service-section section-tb-padd-100" style="background: #red"> -->
+            <div>
+                <?php
+                echo "$ip";
+                while($row = mysqli_fetch_array($result)) {
+                ?>
+                    <!-- <div class="row tv-service-section-row"> -->
+                        <div class="col-xl-4 col-md-6 tv-sm-center">
+                            <article class="tv-icon-box">
+                                <div class="tv-box-top">
+                                    <div class="tv-box-icon"><span class="ti-user"></span></div>
+                                    <div class="tv-box-header">
+                                        <h5><a href="#"><?php echo $row["Title"]; ?></a></h5>
+                                    </div>
+                                </div>
+                                <div class="tv-divider"></div>
+                                <div class="tv-box-body">
+                                    <p><?php echo $row["Description"]; ?></p>
+                                </div>
+                            </article>
+                        </div>
+                    <!-- </div> -->
+                <?php
+                }
+                ?>
+            </div>
+            
         </div>
         <script>
             $(document).ready(function(){

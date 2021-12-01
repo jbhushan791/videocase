@@ -22,3 +22,8 @@
 .navpill{
     background-color: paleturquoise !important; 
 }
+
+.navigation-bar{
+    display: flex;
+    justify-content: space-between;
+}

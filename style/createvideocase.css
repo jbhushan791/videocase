@@ -187,6 +187,10 @@ p {
     padding: 2px
 }
 
+.background{
+    background: rgba(0, 0, 0, 0) url("../image/green_backgroud.jpeg") no-repeat fixed center center / cover ;
+}
+
 #progressbar li:after {
     content: '';
     width: 100%;
