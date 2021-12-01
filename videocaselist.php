@@ -35,6 +35,9 @@
         </div> -->
     <div class="sidenav">
         <div class="row">
+            <?php
+                include 'filter.php';
+            ?>
             <div class="col-sm-2" >
                 <div id="filter-1" class="card">
                     <div class="card-header">

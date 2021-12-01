@@ -39,7 +39,6 @@ $result = mysqli_query($conn,$sql);
             <!-- <div class="service-section section-tb-padd-100" style="background: #red"> -->
             <div>
                 <?php
-                echo "$ip";
                 while($row = mysqli_fetch_array($result)) {
                 ?>
                     <!-- <div class="row tv-service-section-row"> -->
