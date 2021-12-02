@@ -15,6 +15,9 @@
         if($result == "") {
            
         } else {
+            session_start();
+            //echo $result->get_first_name();
+            $_SESSION['user'] = serialize($result);
             header("location: /home.php");
         }
     }

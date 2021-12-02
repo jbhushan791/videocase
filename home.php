@@ -1,3 +1,7 @@
+<?php
+  include 'model/User.php';
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +24,16 @@
 <header>
     <h2>PBL Tech</h1>
     <div class="top-nav">
-      <a href="login.php">Login</a>
-      <a href="register.php">Register</a>
+      <?php
+        if(isset($_SESSION["user"])) {
+          $user = unserialize($_SESSION["user"]);
+          echo "<a href='profile.php'>Hi " .$user->get_first_name() . "</a>";
+          echo "<a href='logout.php'>Logout</a>";
+        } else {
+          echo "<a href='login.php'>Login</a>";
+          echo "<a href='register.php'>Register</a>";
+        }
+      ?>
     </div>
 </header>
   <div class="navigation-bar">
