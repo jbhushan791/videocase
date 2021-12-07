@@ -1,7 +1,8 @@
 <?php
 
 // include_once 'database/database-test.php';
-include_once 'database/database.php';
+// include_once 'database/database.php';
+include_once 'db/VideocaseDao.class.php';
 	
 	$showAlert = false;
 	$showError = false;
@@ -13,49 +14,15 @@ include_once 'database/database.php';
 	$description = $_POST["description"];
 
   // Classroom video
-	$title = $_POST["ctitle"];
-  $tag = $_POST["ctag"];
-	$description = $_POST["cdescription"];
+	$ctitle = $_POST["ctitle"];
+  $ctag = $_POST["ctag"];
+	$cdescription = $_POST["cdescription"];
 
+  // Classroom video
+	$ctitle = $_POST["ctitle"];
+  $ctag = $_POST["ctag"];
+	$cdescription = $_POST["cdescription"];
 
-
-  //  // Create connection
-  //   $servername = "127.0.0.1";
-  //   $username = "root";
-  //   $password = "123456";
-  //   $dbname = "videocase";
-  //   $conn = new mysqli($servername, $username, $password,$dbname);
-  //   // Check connection
-  //   if ($conn->connect_error) {
-  //   die("Connection failed: " . $conn->connect_error);
-  //   }
-
-   $sql = "SELECT FIRST_NAME, LAST_NAME, EMAIL,PASSWORD FROM User WHERE EMAIL = '$email'";
-
-   $result = $conn->query($sql);
-
-   if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo $row["PASSWORD"]."<br>";
-        echo $row["FIRST_NAME"]."<br>";
-        echo $row["LAST_NAME"]."<br>";
-        echo $pass1."<br>";
-        if($row["PASSWORD"] === $pass1){
-          // echo "alert(Login successful)</html>";
-           echo "<b>login successful</b><br>";
-           header("location:home.php"); 
-        } else {
-            //alert("Invalid password");
-            echo "Invalid password <br>";
-        }
-    }
-  } else {
-    //alert("Invalid credential");
-    echo "Invalid credential";
-  }
- 
-      $conn->close();
 	
 ?>
 

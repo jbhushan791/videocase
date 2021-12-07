@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Data Model for User
+ */
 class User {
 
     private $user_id;
@@ -42,6 +46,10 @@ class User {
 
     function get_affiliation(){
         return $this->affiliation;
+    }
+
+    function get_description() {
+        return $this->description;
     }
 
 }

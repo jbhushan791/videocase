@@ -1,47 +1,29 @@
 <!doctype html>
-<style>
-    <?php
-        include 'style/video.css'; 
-    ?>
-</style>
 <html>
 <head>
     <title>filter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <link rel="stylesheet" href="dist/style.min.css" />
+    <script src="dist/jstree.min.js"></script>  
 </head>
 <body>
-<form method="post" action="test1.php">
-    <?php
-        include_once 'db/Tags.class.php';
-        $tags = new Tags();
-        $categories = $tags->getAllCategories();
-        foreach ($categories as $value) { 
-    ?>
-            <div class="card">
-                <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" href="#sub"><?php echo $value; ?></a>
-                </div>
-                <div id="sub" class="collapse">
-                    <?php
-                        include_once 'db/Tags.class.php';
-                        $tags = new Tags();
-                        $subTags = $tags->getTags($value);
-                        foreach ($subTags as $subTag) {
-                        ?>
-                            <li>
-                                <input type=checkbox 
-                                        id= <?php echo $subTag->get_name() ?> 
-                                        name=<?php echo $subTag->get_name() ?>  
-                                        value=<?php echo $subTag->get_name() ?>
-                                >
-                                <label for=<?php echo $subTag->get_name() ?> > <?php echo $subTag->get_name() ?></label>
-                            </li>                            
-                    <?php } ?>
-                   
-                </div>
-            </div>
-    <?php } ?>
-    
-    <input type="submit">
-</form>
+    <div id="tree-container"></div>
+<script type="text/javascript">
+$(document).ready(function(){
+    //fill data to tree  with AJAX call
+    $('#tree-container').jstree({
+    'plugins': ["wholerow", "checkbox"],
+        'core' : {
+            'data' : {
+                "url" : "tree_data.php",
+                "plugins" : [ "wholerow", "checkbox" ],
+                "dataType" : "json" // needed only if you do not supply JSON headers
+            }
+        }
+    })
+});
+</script>
 </body>
+
 </html>

@@ -3,6 +3,9 @@
 include_once 'database.class.php';
 include_once 'model/Tag.php';
 
+/**
+ * This class deals with all database operation related to Tag
+ */
 class Tags extends Database{
 
     public function getAllCategories(){
@@ -29,6 +32,22 @@ class Tags extends Database{
             echo $row["Name"];
             $json[] = $row["Name"];
         }
+    }
+
+    public function getAllTags(){
+
+        $sql = "SELECT * FROM Tag";
+
+        $result = $this->connect()->query($sql);
+
+       // $tags = [];
+        $json = [];
+        while($row = $result->fetch_assoc()){
+            $json[] = $row;
+            // $tag = new Tag($row["Name"], $row["TagId"], $row["Category"], $row["ParentTagId"]);
+            // array_push($tags,$tag);
+        }
+        return $json;
     }
 
     public function getTagsByCategory($category){

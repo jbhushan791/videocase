@@ -1,3 +1,8 @@
+<?php 
+    include 'model/User.php';
+    session_start();
+?>
+
 <style>
     <?php include 'style/side.css'; ?>
 </style>
@@ -11,6 +16,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style/header.css">
         <style>
         .fakeimg {
             height: 200px;
@@ -19,10 +25,25 @@
         </style>
     </head>
     <!-- <body> -->
-    <div class="jumbotron text-center bg-image a" style="background-image: url('v.jpeg'); margin-bottom:0 ">
-        <!-- <h1 class ="text-info"><b>PBL-TECH: Wise Practice Case Construction Tool</b></h1> -->
+    <header>
+        <h2>PBL Tech</h1>
+        <div class="top-nav">
+        <?php
+            if(isset($_SESSION["user"])) {
+            $user = unserialize($_SESSION["user"]);
+            // echo "<button type='button' class='btn btn-link'>Hi ".$user->get_first_name() . "</button>";
+            echo "<a href='profile.php'>Hi " .$user->get_first_name() . "</a>";
+            echo "<a href='logout.php'>Logout</a>";
+            } else {
+            echo "<a href='login.php'>Login</a>";
+            echo "<a href='register.php'>Register</a>";
+            }
+        ?>
+        </div>
+    </header>
+    <!-- <div class="jumbotron text-center bg-image a" style="background-image: url('v.jpeg'); margin-bottom:0 ">
         <h1><b>PBL-TECH</b></h1>
-    </div>
+    </div> -->
     <div>
         <h1>VIDEO CASE NAME</h1>
         <div class="row side">

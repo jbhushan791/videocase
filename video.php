@@ -1,3 +1,9 @@
+<?php
+  include 'model/Note.php';
+  include 'model/Video.php';
+  include 'model/User.php';
+  session_start();
+?>
 <!DOCTYPE html>
 <style>
     <?php include 'style/video.css'; ?>
@@ -11,6 +17,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style/header.css">
         <style>
         .fakeimg {
             height: 200px;
@@ -18,11 +25,26 @@
         }
         </style>
     </head>
+    <header>
+        <h2>PBL Tech</h1>
+        <div class="top-nav">
+        <?php
+            if(isset($_SESSION["user"])) {
+            $user = unserialize($_SESSION["user"]);
+            // echo "<button type='button' class='btn btn-link'>Hi ".$user->get_first_name() . "</button>";
+            echo "<a href='profile.php'>Hi " .$user->get_first_name() . "</a>";
+            echo "<a href='logout.php'>Logout</a>";
+            } else {
+            echo "<a href='login.php'>Login</a>";
+            echo "<a href='register.php'>Register</a>";
+            }
+        ?>
+        </div>
+    </header>
     <!-- <body> -->
-    <div class="jumbotron text-center bg-image a" style="background-image: url('v.jpeg'); margin-bottom:0 ">
-    <!-- <h1 class ="text-info"><b>PBL-TECH: Wise Practice Case Construction Tool</b></h1> -->
-    <h1><b>PBL-TECH: Wise Practice Case Construction Tool</b></h1>
-    </div>
+    <!-- <div class="jumbotron text-center bg-image a" style="background-image: url('v.jpeg'); margin-bottom:0 ">
+    <h1><b>PBL-TECH</b></h1>
+    </div>  -->
     <div class="bigvideo">
         <div class ="v" style="border: cornflowerblue;">
         <h3 class="videotitle"> VIDEO TITLE </h3>
@@ -37,12 +59,17 @@
             Overview
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#notes">
-            <i class="material-icons" style="font-size:36px;">note</i>
-            Notes
-        </a>
-      </li>   
+      <?php
+            if(isset($_SESSION["user"])) {
+                $user = unserialize($_SESSION["user"]);
+        ?>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#notes">
+                <i class="material-icons" style="font-size:36px;">note</i>
+                Notes
+            </a>
+        </li>   
+      <?php } ?>
     </ul>
   </div> 
   <!-- Tab panes -->
@@ -69,23 +96,23 @@
                 <label> Video description.. content... description </label>
             </div>
         </div>
-        <div id="notes" class="container tab-pane fade"><br>
-            <div>
-                <div id="note" class="note">
-                    <label>Note 1.. Note ... Some important notes</label>
+            <div id="notes" class="container tab-pane fade"><br>
+                <div>
+                    <div id="note" class="note">
+                        <label>Note 1.. Note ... Some important notes</label>
+                    </div>
+                    <div id="note" class="note">
+                        <label>Note 2.. Note ... Some text<br>
+                        Second line <br>
+                        Third line</label>
+                    </div>
+                    <div id="note" class="note">
+                        <label>Note 3.. Note ... Some text</label>
+                    </div>
+                    <textarea class="form-control" rows="5" id="note"></textarea>
+                    <button id="note" type="submit" class="btn btn-outline-secondary btn-sm">Post</button>
                 </div>
-                <div id="note" class="note">
-                    <label>Note 2.. Note ... Some text<br>
-                    Second line <br>
-                    Third line</label>
-                </div>
-                <div id="note" class="note">
-                    <label>Note 3.. Note ... Some text</label>
-                </div>
-                <textarea class="form-control" rows="5" id="note"></textarea>
-                <button id="note" type="submit" class="btn btn-outline-secondary btn-sm">Post</button>
             </div>
-        </div>
     </div>
             <!-- <div class ="bar">
                 <a href="#" data-toggle="collapse" data-target="#note">

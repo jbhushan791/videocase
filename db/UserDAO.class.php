@@ -3,6 +3,9 @@
 include_once 'database.class.php';
 include_once 'model/User.php';
 
+/**
+ * This class deals with all database operation related to User
+ */
 class UserDAO extends Database{
 
     public function register($first_name, $last_name, $email, $passwd, $role, $affiliation, $description){
@@ -16,7 +19,7 @@ class UserDAO extends Database{
 
     public function login($email,$passwd){
 
-        $sql = "SELECT FIRST_NAME, LAST_NAME, EMAIL FROM User WHERE EMAIL = '$email' and PASSWORD = '$passwd'";
+        $sql = "SELECT * FROM User WHERE EMAIL = '$email' and PASSWORD = '$passwd'";
 
         $result = $this->connect()->query($sql);
 

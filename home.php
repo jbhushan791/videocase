@@ -27,7 +27,8 @@
       <?php
         if(isset($_SESSION["user"])) {
           $user = unserialize($_SESSION["user"]);
-          echo "<a href='profile.php'>Hi " .$user->get_first_name() . "</a>";
+          // echo "<button type='button' class='btn btn-link'>Hi ".$user->get_first_name() . "</button>";
+          echo "<a data-toggle='modal' href='#myProfile'>Hi " .$user->get_first_name() . "</a>";
           echo "<a href='logout.php'>Logout</a>";
         } else {
           echo "<a href='login.php'>Login</a>";
@@ -45,15 +46,27 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#videocaselist">Videocases</a>
         </li>
-        <li class="nav-item">
+        <?php
+          if(isset($_SESSION["user"])) {
+            $user = unserialize($_SESSION["user"]);
+            if($user->get_role() == "Admin"){
+              echo "<li class='nav-item'>";
+              echo "<a class='nav-link' data-toggle='tab' href='#admin'>Admin Page</a>";
+              echo "<li>";
+            }
+          }
+        ?>
+        
+        
+        <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#presenter">Presenter</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#contact">Contact Us</a>
-        </li>  
-        <li class="nav-item">
+        </li>   -->
+        <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#admin">Admin Page</a>
-        </li>   
+        </li>    -->
       </ul>
     </div>
   </div> 
@@ -74,6 +87,36 @@
       <div id="admin" class="container tab-pane fade"><br>
           <?php include 'admin.php'; ?>
       </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myProfile" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">About me</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <?php
+            if(isset($_SESSION["user"])) {
+              $user = unserialize($_SESSION["user"]);
+                echo "<p>" .$user->get_first_name(). " " .$user->get_last_name(). "</p>";
+                echo "<p>" .$user->get_email().   "</p>";
+                echo "<p>" .$user->get_affiliation().   "</p>";
+                echo "<p>" .$user->get_description().   "</p>";
+                
+            }
+          ?>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+      
+    </div>
   </div>
   <?php include 'footer.php'; ?>
 </html>
