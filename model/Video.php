@@ -13,15 +13,13 @@ class Video{
     private $likes;
     private $counts;
     private $sequence;
+    private $url;
 
-    function __construct($videoId, $title, $type, $description, $videocaseId, $likes, $sequence) {
-        $this->videoId = $videoId;
+    function __construct($title, $type, $description, $url) {
         $this->title = $title;
         $this->type = $type;
         $this->description = $description;
-        $this->videocaseId = $videocaseId;
-        $this->sequence = $sequence;
-        $this->likes = $likes;
+        $this->url = $url;
       }
 
     function get_videoId() {
@@ -48,12 +46,20 @@ class Video{
         return $this->videocaseId;
     }
 
+    function set_videocaseId($videocaseId) {
+        $this->url = $videocaseId;
+    }
+
     function get_sequence() {
         return $this->sequence;
     }
 
     function get_likes() {
         return $this->likes;
+    }
+
+    function get_url() {
+        return $this->url;
     }
 }
 

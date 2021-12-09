@@ -8,7 +8,21 @@ class Videocase{
     private $videocaseId;
     private $title;
     private $description;
+    private $presenter_id;
     private $tags = [];
+
+    function __construct($title, $description) {
+        $this->title = $title;
+        $this->description = $description;
+    }
+
+    function get_title() {
+        return $this->title;
+    }
+
+    function get_description() {
+        return $this->description;
+    }
 
     
 }

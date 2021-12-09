@@ -1,78 +1,75 @@
 <?php
 
-// include_once 'database/database-test.php';
-// include_once 'database/database.php';
 include_once 'db/VideocaseDao.class.php';
-	
-	$showAlert = false;
-	$showError = false;
-	$exists=false;
+include_once 'model/Videocase.php';
+include_once 'model/Video.php';
+include_once 'model/Presenter.php';
 
-  // Videcase
-	$title = $_POST["title"];
-  $tag = $_POST["tag"];
-	$description = $_POST["description"];
+$videcaseDao = new VideocaseDao();
 
-  // Classroom video
-	$ctitle = $_POST["ctitle"];
-  $ctag = $_POST["ctag"];
-	$cdescription = $_POST["cdescription"];
+if(isset($_POST['title'])){
+    // Add presenter information
+    $presenter = new Presenter($_POST['name'], $_POST['email'], $_POST['biography'], $_POST['school']);
 
-  // Classroom video
-	$ctitle = $_POST["ctitle"];
-  $ctag = $_POST["ctag"];
-	$cdescription = $_POST["cdescription"];
+    //Add videocase information
+    $videocase = new Videocase($_POST['title'], $_POST['description']);
 
-	
+    $videos = [];
+    //classroom video info
+    $target_dir = "uploads/";
+
+    $target_classroom_video = $target_dir . $_FILES['cvideo']['name'];
+    $classroom_video1 = new Video($_POST['title'], 'Classroom', $_POST['description'],$target_classroom_video );
+    array_push($videos,$classroom_video1);
+
+    if($_POST['pre-title'] != ""){
+      $target_pre_interview = $target_dir . $_FILES['pre-video']['name'];
+      $pre_video = new Video($_POST['pre-title'], 'pre-Interview', $_POST['pre-description'],$target_pre_interview );
+      array_push($videos,$pre_video);
+    }
+
+    if($_POST['post-title'] != ""){
+      $target_post_interview = $target_dir .  $_FILES['post-video']['name'];
+      $post_video = new Video($_POST['post-title'], 'post-Interview', $_POST['post-description'],$target_post_interview );
+      array_push($videos,$post_video);
+    }
+
+    move_uploaded_file($_FILES['cvideo']['tmp_name'], $target_classroom_video);
+    move_uploaded_file($_FILES['pre-video']['tmp_name'], $target_pre_interview);
+    move_uploaded_file($_FILES['post-video']['tmp_name'], $target_post_interview);
+    $result = $videcaseDao->create($videocase,$presenter, $videos);
+    
+}
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
-    <head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>  
-
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>   -->
-
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
         background-color: #f1f1f1;
+    }
+    
+    h3, progress {
+        /* background-color: #ffffff; */
+        margin-left: 12%;
+        /* margin: auto; */
+        font-family: Raleway;
+        width: 75%;
+        min-width: 300px;
       }
 
-      #regForm {
+    form {
         background-color: #ffffff;
-        margin: 100px auto;
+        margin: auto;
         font-family: Raleway;
         padding: 40px;
         width: 70%;
         min-width: 300px;
       }
 
-    h1 {
-      text-align: center;  
-    }
-
-    input {
+    .text {
       padding: 10px;
       width: 100%;
       font-size: 17px;
@@ -81,29 +78,15 @@ include_once 'db/VideocaseDao.class.php';
     }
 
     textarea {
-        padding: 10px;
+      padding: 10px;
       width: 100%;
       font-size: 17px;
       font-family: Raleway;
       border: 1px solid #aaaaaa;
     }
 
-    .background{
-        background: rgba(0, 0, 0, 0) url("../image/cv.png") no-repeat fixed center center / cover ;
-    }
-
-    /* Mark input boxes that gets an error on validation: */
-    input.invalid {
-      background-color: #ffdddd;
-    }
-
-    /* Hide all steps by default: */
-    .tab {
-      display: none;
-    }
-
     button {
-      background-color: #04AA6D;
+      background-color: #3390FF;
       color: #ffffff;
       border: none;
       padding: 10px 20px;
@@ -112,207 +95,133 @@ include_once 'db/VideocaseDao.class.php';
       cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.8;
+    h1 {
+      color: #3390FF;
+      border: none;
+      /* padding: 10px 20px; */
+      font-family: Raleway;
+      cursor: pointer;
     }
-
-    #prevBtn {
-      background-color: #bbbbbb;
-    }
-
-    /* Make circles that indicate the steps of the form: */
-    .step {
-      height: 15px;
-      width: 15px;
-      margin: 0 2px;
-      background-color: #bbbbbb;
-      border: none;  
-      border-radius: 50%;
-      display: inline-block;
-      opacity: 0.5;
-    }
-
-    .step.active {
-      opacity: 1;
-    }
-
-    /* Mark the steps that are finished and valid: */
-    .step.finish {
-      background-color: #04AA6D;
-    }
-    .r{
-        /* display: flex; */
-        /* justify-content: flex-start */
-    }
-  </style>
- </head>
+/* form#multiphase{ border:#000 1px solid; padding:24px; width:350px; } */
+form#multiphase > #phase2, #phase3, #phase4, #show_all_data{ display:none; }
+</style>
+<script>
+var t1, d1, cdescription, ctitle, interviewType, idescription, ititle;
+function _(x){
+	return document.getElementById(x);
+}
+function processPhase1(){
+	t1 = _("title").value;
+	d1 = _("description").value;
+	if(t1.length > 0 && d1.length > 0){
+		_("phase1").style.display = "none";
+		_("phase2").style.display = "block";
+		_("progressBar").value = 25;
+		_("status").innerHTML = "Phase 2 of 4";
+	} else {
+	    alert("Please fill in the fields");	
+	}
+}
+function processPhase2(){
+	cdescription = _("cdescription").value;
+    ctitle = _("ctitle").value;
+	if(ctitle.length > 0 && cdescription.length > 0){
+		_("phase2").style.display = "none";
+		_("phase3").style.display = "block";
+		_("progressBar").value = 50;
+		_("status").innerHTML = "Phase 3 of 4";
+	} else {
+        alert("Please fill in the fields");	
+	}
+}
+function processPhase3(){
+	interviewType = _("interview-type").value;
+	if(interviewType.length > 0){
+		_("phase3").style.display = "none";
+        _("phase4").style.display = "block";
+		_("progressBar").value = 75;
+		_("status").innerHTML = "Phase 4 of 4";
+	} else {
+	    alert("Please choose interview type");	
+	}
+}
+function processPhase4(){
+    _("phase4").style.display = "none";
+    _("show_all_data").style.display = "block";
+    _("progressBar").value = 100;
+    _("status").innerHTML = "Phase 4 of 4";
+}
+function submitForm(){
+	_("multiphase").method = "post";
+	_("multiphase").action = "createvideocase.php";
+	_("multiphase").submit();
+}
+</script>
+</head>
 <body>
-
-<form id="regForm" action="createVideocase.php" method="post">
-  <!-- <h1>Register:</h1> -->
-  <!-- One "tab" for each step in the form: -->
-  <div class="tab">
-    <b>Videocase Title :</b>
-    <p><input  oninput="this.className = ''" name="title"></p>
-    <div class="form-group">
-			<label>Add Tags:</label><br/>
-			<input type="text" name="tags" placeholder="Tags" class="typeahead tm-input form-control tm-input-info"/>
-		</div>
-
-    <!-- <b>Tag:</b>
-    <p> <input oninput="this.className = ''" name="tag"></p> -->
-    <b>Description:</b>
-    <p><textarea type = "textarea" rows="7" oninput="this.className = ''" name="description"></textarea></p>
+<progress id="progressBar" value="0" max="100"></progress>
+<h3 id="status">Phase 1 of 4 
+</h3>
+<form id="multiphase" onsubmit="return false" enctype="multipart/form-data">
+  <div id="phase1">
+        <h1>Videocase</h1> 
+        Title: <br>
+        <input class ="text"  id="title" name="title"><br><br>
+        Description: <br>
+        <textarea id ="description" name ="description" rows="7"> </textarea><br><br>
+        <button onclick="processPhase1()">Continue</button>
   </div>
-  <div class="tab">
-    <b>Add classroom videos</b>
-    <b>Title</b>
-    <p><input oninput="this.className = ''" name="ctitle"></p>
-    <b>Tag:</b>
-    <p> <input oninput="this.className = ''" name="ctag"></p>
-    <b>Description:</b>
-    <p><textarea type = "textarea" rows="7" oninput="this.className = ''" name="cdescription"></textarea></p>
-    <div class="file-upload-wrapper">
-        <input type="file" id="input-file-now" class="file-upload" name="cfile" />
-    </div>
-  </div>
-  <div class="tab">
-    <b>Add teacher interviews</b> :
-    <div>
-      <label> Select an option: </label>
-      <div class="r"> <input type=radio id=pre name=pre value=pre><label for=pre> Pre Interview</label></div>
-      <div class="r"> <input type=radio id=post name=post value=post><label for=post> Post Interview</label></div>
-      </div>
-      <p><input placeholder="title..." oninput="this.className = ''" name="dd"></p>
-      <p><input placeholder="tag.." oninput="this.className = ''" name="nn"></p>
-      <p><textarea type = "textarea" rows="7" placeholder="description..." oninput="this.className = ''" name="lname"></textarea></p>
-      <div class="file-upload-wrapper">
-          <input type="file" id="input-file-now" class="file-upload" />
-      </div>
-    </div>
-   <div class="tab"><b>Add background information:</b>
-        <p><textarea type = "textarea" rows="7" placeholder="Add teacher biography..." oninput="this.className = ''" name="lname"></textarea></p>
-        <p><textarea type = "textarea" rows="7" placeholder="dd School Information..." oninput="this.className = ''" name="lname"></textarea></p> 
-  </div>
-  <div class="tab"><b>Add Case Material:</b>
-        <p><textarea type = "textarea" rows="7" placeholder="Add Lesson Overview..." oninput="this.className = ''" name="lname"></textarea></p>
-        <p><textarea type = "textarea" rows="7" placeholder="Add Lesson Narrative..." oninput="this.className = ''" name="lname"></textarea></p> 
-        <p><input placeholder="title..." oninput="this.className = ''" name="dd"></p>
+  <div id="phase2">
+        <h1>Add classroom videos</h1>
+        Title: <br>
+        <input class ="text" type="text" id ="ctitle" name="ctitle"><br>
+        Description: <br>
+        <textarea type = "textarea" name ="cdescription" id ="cdescription" rows="7"></textarea><br><br>
         <div class="file-upload-wrapper">
-        <input type="file" id="input-file-now" class="file-upload" />
-        </div>
-  </div>
-  <div style="overflow:auto;">
-    <div style="float:right;">
-      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        <input type="file" accept="video/*" name="cvideo" /> <br><br>
     </div>
+        <button onclick="processPhase2()">Continue</button>
   </div>
-  <!-- Circles which indicates the steps of the form: -->
-  <div style="text-align:center;margin-top:40px;">
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
+  <div id="phase3">
+        <h1>Add Teacher Interview</h1>
+        Country: 
+        <select id="interview-type" name="interview-type">
+        <option value="Pre Interview">Pre Interview</option>
+        <option value="Post Interview">Post Interview</option>
+        </select><br>
+        <h2>Pre Interview</h2>
+        Title: <br>
+        <input class ="text" type="text" id ="pre-title" name="pre-title"><br>
+        Description: <br>
+        <textarea type = "textarea" name ="pre-description" id ="pre-description" rows="7"></textarea><br><br>
+        <input type="file" accept="video/*" name="pre-video" /> <br><br>
+
+        <h2>Post Interview</h2>
+        Title: <br>
+        <input class ="text" type="text" id ="post-title" name="post-title"><br>
+        Description: <br>
+        <textarea type = "textarea" name ="post-description" id ="post-description" rows="7"></textarea><br><br>
+        <input type="file" accept="video/*" name="post-video" /> <br><br>
+
+        <button onclick="processPhase3()">Continue</button>
+  </div>
+  <div id="phase4">
+        <h1>Add background information</h1>
+         Name: <br>
+        <input class ="text" id="name" name="name"><br><br>
+         Email: <br>
+        <input class ="text" id="email" name="email"><br><br>
+        <p><textarea type = "textarea" rows="7" placeholder="Add teacher biography..."  name="biography"></textarea></p>
+        <p><textarea type = "textarea" rows="7" placeholder="Add School Information..." name="school"></textarea></p> 
+        <button onclick="processPhase4()">Continue</button>
+  </div>
+  <div id="show_all_data">
+        Presentetr Email: <span id="display_fname"></span> <br>
+        Last Name: <span id="display_lname"></span> <br>
+        Gender: <span id="display_gender"></span> <br>
+        Country: <span id="display_country"></span> <br>
+        <button onclick="submitForm()">Submit Data</button>
   </div>
 </form>
-
-<script>
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
-
-function showTab(n) {
-  // This function will display the specified tab of the form...
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
-  //... and fix the Previous/Next buttons:
-  if (n == 0) {
-    document.getElementById("prevBtn").style.display = "none";
-  } else {
-    document.getElementById("prevBtn").style.display = "inline";
-  }
-  if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
-  }
-  //... and run a function that will display the correct step indicator:
-  fixStepIndicator(n)
-}
-
-function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form...
-  if (currentTab >= x.length) {
-    // ... the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-  }
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
-}
-
-function validateForm() {
-  // This function deals with validation of the form fields
-  var x, y, i, valid = true;
-  x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByTagName("input");
-  // A loop that checks every input field in the current tab:
-  for (i = 0; i < y.length; i++) {
-    // If a field is empty...
-    if (y[i].value == "") {
-      // add an "invalid" class to the field:
-      y[i].className += " invalid";
-      // and set the current valid status to false
-      valid = false;
-    }
-  }
-  // If the valid status is true, mark the step as finished and valid:
-  if (valid) {
-    document.getElementsByClassName("step")[currentTab].className += " finish";
-  }
-  return valid; // return the valid status
-}
-
-function fixStepIndicator(n) {
-  // This function removes the "active" class of all steps...
-  var i, x = document.getElementsByClassName("step");
-  for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
-  }
-  //... and adds the "active" class on the current step:
-  x[n].className += " active";
-}
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    var tagApi = $(".tm-input").tagsManager();
-
-
-    jQuery(".typeahead").typeahead({
-      name: 'tags',
-      displayKey: 'name',
-      source: function (query, process) {
-        return $.get('getTags.php', { query: query }, function (data) {
-          data = $.parseJSON(data);
-          return process(data);
-        });
-      },
-      afterSelect :function (item){
-        tagApi.tagsManager("pushTag", item);
-      }
-    });
-  });
-</script>
-
 </body>
 </html>

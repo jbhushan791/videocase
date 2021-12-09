@@ -86,7 +86,7 @@ class Tags extends Database{
 
        // $sql = "SELECT tagId FROM Tag WHERE name = '$parentTag'";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         $tags = [];
         while($row = $result->fetch_assoc()){
@@ -100,7 +100,7 @@ class Tags extends Database{
 
         $sql = "SELECT * FROM Tag WHERE Name '%.?.%'";
 
-        $result = $this->connect()->prepare($sql);
+        $result = $this->getConnection()->prepare($sql);
 
         $result->execute([$search_str]);
 

@@ -1,44 +1,58 @@
 <?php
 
 include_once 'database.class.php';
+include_once 'PresenterDao.class.php';
+include_once 'VideoDao.class.php';
 include_once 'model/Videocase.php';
+include_once 'model/Presenter.php';
+include_once 'model/Video.php';
 
 /**
  * This class deals with all database operation related to Videocase
  */
-class VideocaseDao extends Database{
+class VideocaseDao extends Database {
 
     /**
      * This function is responsible for retrieving all 
      */
-    public function getAll($videocaseId){
+    public function getAll(){
 
         $sql = "SELECT * FROM VIDEOCASE";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         $videocases = [];
         while($row = $result->fetch_assoc()){
-            $videocase = new Videocase($row["video_id"], $row["title"], $row["type"], $row["description"], $row["videocase_id"], $row["likes"], $row["sequence"]);
+            $videocase = new Videocase($row["Title"], $row["Description"]);
             array_push($videocases,$videocase);
         }
         return $videocases;
     }
 
 
-    // public function create($videocaseId){
+    public function create($videocase, $presenter, $videos){
 
-    //     $sql = "SELECT * FROM VIDEOCASE";
+        $presenterDao = new PresenterDao();
+        $presenterId = $presenterDao->create1($presenter);
+        
+        $current_date = date("Y-m-d");
+        $title = $videocase->get_title();
+        $description = $videocase->get_description();
 
-    //     $result = $this->connect()->query($sql);
+        $sql = "INSERT INTO Videocase (Title, Description, CreatedDate, ModifiedDate, Presenter_id)
+        VALUES ('$title', '$description', '$current_date' ,'$current_date', '$presenterId')";
 
-    //     $videocases = [];
-    //     while($row = $result->fetch_assoc()){
-    //         $videocase = new Videocase($row["video_id"], $row["title"], $row["type"], $row["description"], $row["videocase_id"], $row["likes"], $row["sequence"]);
-    //         array_push($videocases,$videocase);
-    //     }
-    //     return $videocases;
-    // }
+        $result = $this->getConnection()->query($sql);
+        $videocaseId = $this->getConnection()->insert_id;
+
+        $videoDao = new VideoDao();
+        foreach($videos as $v) {
+            $v->set_videocaseId($videocaseId);
+            $videoDao->create($v);
+        }
+
+        return $videocaseId;
+    }
 
    
 }

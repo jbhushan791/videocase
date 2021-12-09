@@ -7,19 +7,18 @@
 	$showError = false;
 	$exists=false;
 
-	$fname = $_POST["fname"];
-	$lname = $_POST["lname"];
-	$email = $_POST["email"];
-	$pass1 = $_POST["pass1"];
-	$pass2 = $_POST["pass2"];
-    $affiliation = $_POST["affiliation"];
-    $description = $_POST["description"];
-    $user_type = $_POST["user_type"];
-
     if(isset($_POST["submit"])){
+        $fname = $_POST["fname"];
+	    $lname = $_POST["lname"];
+	    $email = $_POST["email"];
+	    $pass1 = $_POST["pass1"];
+	    $pass2 = $_POST["pass2"];
+        $affiliation = $_POST["affiliation"];
+        $description = $_POST["description"];
+        $user_type = $_POST["user_type"];
         $result = $userDAO->register($fname, $lname, $email, $pass1, $user_type, $affiliation, $description);
         if($result == 1) {
-           header("location: /home.php");
+           header("location: /videocase/home.php");
         }
     }
     

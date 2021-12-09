@@ -14,7 +14,7 @@ class NoteDao extends Database{
         $sql = "INSERT INTO Note (user_id, video_id, text)
                 VALUES ('$userId', '$videoId','$text')";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
         return $result;
     }
 
@@ -22,7 +22,7 @@ class NoteDao extends Database{
 
         $sql = "SELECT * FROM NOTE WHERE user_id = '$userId' and  video_id = '$videoId'";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         $notes = [];
         while($row = $result->fetch_assoc()){
@@ -36,7 +36,7 @@ class NoteDao extends Database{
 
         $sql = "UPDATE NOTE SET text = '$text' WHERE note_id = '$noteId'";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         return $result;
     }
