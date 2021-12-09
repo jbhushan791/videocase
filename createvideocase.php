@@ -15,15 +15,28 @@ if(isset($_POST['title'])){
     $videocase = new Videocase($_POST['title'], $_POST['description']);
 
     $videos = [];
+    $tag_ids = [];
+
+  
+    // foreach( $tag_ids as $id){
+    //   print_r($id);
+    // }
+
     //classroom video info
     $target_dir = "uploads/";
 
     $target_classroom_video = $target_dir . $_FILES['cvideo']['name'];
-    $classroom_video1 = new Video($_POST['title'], 'Classroom', $_POST['description'],$target_classroom_video );
+    $classroom_video1 = new Video($_POST['title'], 'Classroom', $_POST['description'], $target_classroom_video );
+    // $classroom_video1->set_tags($_POST['tags']);
+    $array = explode(',', $_POST['tags']);
+    $classroom_video1->set_tags($array);
+   
     array_push($videos,$classroom_video1);
 
     if($_POST['pre-title'] != ""){
+      
       $target_pre_interview = $target_dir . $_FILES['pre-video']['name'];
+     
       $pre_video = new Video($_POST['pre-title'], 'pre-Interview', $_POST['pre-description'],$target_pre_interview );
       array_push($videos,$pre_video);
     }
@@ -45,68 +58,75 @@ if(isset($_POST['title'])){
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<style>
-  body {
-        background-color: #f1f1f1;
-    }
-    
-    h3, progress {
-        /* background-color: #ffffff; */
-        margin-left: 12%;
-        /* margin: auto; */
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>  
+  <style>
+    body {
+          background-color: #f1f1f1;
+      }
+      
+      h3, progress {
+          /* background-color: #ffffff; */
+          margin-left: 15%;
+          /* margin: auto; */
+          font-family: Raleway;
+          width: 75%;
+          min-width: 300px;
+        }
+
+      form {
+          background-color: #ffffff;
+          margin: auto;
+          font-family: Raleway;
+          padding: 40px;
+          width: 70%;
+          min-width: 300px;
+        }
+
+      .text {
+        padding: 10px;
+        width: 100%;
+        font-size: 17px;
         font-family: Raleway;
-        width: 75%;
-        min-width: 300px;
+        border: 1px solid #aaaaaa;
       }
 
-    form {
-        background-color: #ffffff;
-        margin: auto;
+      textarea {
+        padding: 10px;
+        width: 100%;
+        font-size: 17px;
         font-family: Raleway;
-        padding: 40px;
-        width: 70%;
-        min-width: 300px;
+        border: 1px solid #aaaaaa;
       }
 
-    .text {
-      padding: 10px;
-      width: 100%;
-      font-size: 17px;
-      font-family: Raleway;
-      border: 1px solid #aaaaaa;
-    }
+      button {
+        background-color: #3390FF;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 17px;
+        font-family: Raleway;
+        cursor: pointer;
+      }
 
-    textarea {
-      padding: 10px;
-      width: 100%;
-      font-size: 17px;
-      font-family: Raleway;
-      border: 1px solid #aaaaaa;
-    }
-
-    button {
-      background-color: #3390FF;
-      color: #ffffff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 17px;
-      font-family: Raleway;
-      cursor: pointer;
-    }
-
-    h1 {
-      color: #3390FF;
-      border: none;
-      /* padding: 10px 20px; */
-      font-family: Raleway;
-      cursor: pointer;
-    }
-/* form#multiphase{ border:#000 1px solid; padding:24px; width:350px; } */
-form#multiphase > #phase2, #phase3, #phase4, #show_all_data{ display:none; }
-</style>
+      h1 {
+        color: #3390FF;
+        border: none;
+        /* padding: 10px 20px; */
+        font-family: Raleway;
+        cursor: pointer;
+      }
+  /* form#multiphase{ border:#000 1px solid; padding:24px; width:350px; } */
+  form#multiphase > #phase2, #phase3, #phase4, #show_all_data{ display:none; }
+  </style>
 <script>
-var t1, d1, cdescription, ctitle, interviewType, idescription, ititle;
+var t1, d1, cdescription, ctitle, idescription, ititle;
 function _(x){
 	return document.getElementById(x);
 }
@@ -125,6 +145,7 @@ function processPhase1(){
 function processPhase2(){
 	cdescription = _("cdescription").value;
     ctitle = _("ctitle").value;
+    // tags = _("tags").value;
 	if(ctitle.length > 0 && cdescription.length > 0){
 		_("phase2").style.display = "none";
 		_("phase3").style.display = "block";
@@ -135,15 +156,19 @@ function processPhase2(){
 	}
 }
 function processPhase3(){
-	interviewType = _("interview-type").value;
-	if(interviewType.length > 0){
-		_("phase3").style.display = "none";
-        _("phase4").style.display = "block";
+    _("phase3").style.display = "none";
+    _("phase4").style.display = "block";
 		_("progressBar").value = 75;
 		_("status").innerHTML = "Phase 4 of 4";
-	} else {
-	    alert("Please choose interview type");	
-	}
+	// interviewType = _("interview-type").value;
+	// if(interviewType.length > 0){
+	// 	_("phase3").style.display = "none";
+  //       _("phase4").style.display = "block";
+	// 	_("progressBar").value = 75;
+	// 	_("status").innerHTML = "Phase 4 of 4";
+	// } else {
+	//     alert("Please choose interview type");	
+	// }
 }
 function processPhase4(){
     _("phase4").style.display = "none";
@@ -151,6 +176,11 @@ function processPhase4(){
     _("progressBar").value = 100;
     _("status").innerHTML = "Phase 4 of 4";
 }
+function updateTags(tag){
+  _("tags").value = tag;
+  document.cookie = "tags =tag";
+}
+
 function submitForm(){
 	_("multiphase").method = "post";
 	_("multiphase").action = "createvideocase.php";
@@ -177,6 +207,8 @@ function submitForm(){
         <input class ="text" type="text" id ="ctitle" name="ctitle"><br>
         Description: <br>
         <textarea type = "textarea" name ="cdescription" id ="cdescription" rows="7"></textarea><br><br>
+        <label>Tags:</label><br/>
+			  <input type="text" name="tags" id = "tags" placeholder="Tags" class="typeahead tm-input form-control tm-input-info"/>
         <div class="file-upload-wrapper">
         <input type="file" accept="video/*" name="cvideo" /> <br><br>
     </div>
@@ -184,11 +216,6 @@ function submitForm(){
   </div>
   <div id="phase3">
         <h1>Add Teacher Interview</h1>
-        Country: 
-        <select id="interview-type" name="interview-type">
-        <option value="Pre Interview">Pre Interview</option>
-        <option value="Post Interview">Post Interview</option>
-        </select><br>
         <h2>Pre Interview</h2>
         Title: <br>
         <input class ="text" type="text" id ="pre-title" name="pre-title"><br>
@@ -223,5 +250,31 @@ function submitForm(){
         <button onclick="submitForm()">Submit Data</button>
   </div>
 </form>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var tagApi = $(".tm-input").tagsManager();
+
+    jQuery(".typeahead").typeahead({
+      name: 'tags',
+      displayKey: 'name',
+      source: function (query, process) {
+        return $.get('getTags.php', { query: query }, function (data) {
+          data = $.parseJSON(data);
+          return process(data);
+        });
+      },
+      afterSelect :function (item){
+        tagApi.tagsManager("pushTag", item);
+        // console.log(tagApi.tagsManager("tags"));
+        updateTags(tagApi.tagsManager("tags"));
+        // tag_ids.push(item);
+      }
+    });
+    // console.log(tagApi.tagsManager("tags"));
+    
+    //print_r(tagApi.tagList());
+  });
+  
+</script>
 </body>
 </html>

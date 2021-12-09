@@ -14,6 +14,7 @@ class Video {
     private $counts;
     private $sequence;
     private $url;
+    private $tags=[];
 
     function __construct($title, $type, $description, $url) {
         $this->title = $title;
@@ -48,6 +49,15 @@ class Video {
 
     function set_videocaseId($videocaseId) {
         $this->videocaseId = $videocaseId;
+    }
+
+
+    function get_tags() {
+        return $this->tags;
+    }
+
+    function set_tags($tags) {
+        $this->tags = $tags;
     }
 
     function get_sequence() {

@@ -1,16 +1,16 @@
 <?php
-  // include_once 'database/database-test.php';
-  include_once 'database/database-local.php';
 
-    $sql = "SELECT Name FROM Tag WHERE Name LIKE '%".$_GET['query']."%'";
+  include_once 'db/TagDao.class.php';
+  include_once 'model/Tag.php';
 
-    $result = $conn->query($sql);
+  $tagDao = new TagDao();
 
-    $json = [];
-	while($row = $result->fetch_assoc()){
-        echo $row["Name"];
-	    $json[] = $row["Name"];
-	}
+  $tags = $tagDao->searchTagsByName($_GET['query']);
 
+  $json = array();
+  foreach($tags as $tag){
+    $json[] = $tag->get_name();
+  }
+  echo json_encode($json);
 
 ?>

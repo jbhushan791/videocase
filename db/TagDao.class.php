@@ -6,13 +6,29 @@ include_once 'model/Tag.php';
 /**
  * This class deals with all database operation related to Tag
  */
-class Tags extends Database{
+class TagDao extends Database {
+
+    // public function createTag($name){
+
+    // }
+
+    public function getTagByName($name){
+
+        $sql = "SELECT * FROM Tag WHERE Name = '$name'";
+        $result = $this->getConnection()->query($sql);
+
+        while($row = $result->fetch_assoc()){
+            $tag = new Tag($row["Name"], $row["Tag_id"], $row["Category"], $row["Parent_Tag_Id"]);
+        }
+        return $tag;
+
+    }
 
     public function getAllCategories(){
 
         $sql = "SELECT distinct category FROM Tag";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         $json = [];
         while($row = $result->fetch_assoc()){
@@ -25,7 +41,7 @@ class Tags extends Database{
 
         $sql = "SELECT * FROM Tag";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         $json = [];
         while($row = $result->fetch_assoc()){
@@ -38,7 +54,7 @@ class Tags extends Database{
 
         $sql = "SELECT * FROM Tag";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
        // $tags = [];
         $json = [];
@@ -54,7 +70,7 @@ class Tags extends Database{
 
         $sql = "SELECT * FROM Tag WHERE category = '$category'";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         $json = [];
         while($row = $result->fetch_assoc()){
@@ -69,11 +85,11 @@ class Tags extends Database{
 
         $sql = "SELECT * FROM Tag WHERE category = '$category'";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
 
         $tags = [];
         while($row = $result->fetch_assoc()){
-            $tag = new Tag($row["Name"], $row["TagId"], $row["Category"], $row["ParentTagId"]);
+            $tag = new Tag($row["Name"], $row["Tag_id"], $row["Category"], $row["Parent_Tag_Id"]);
             array_push($tags,$tag);
         }
         //return $json;
@@ -82,7 +98,7 @@ class Tags extends Database{
 
     public function getChildTags($parentTagId){
 
-        $sql = "SELECT name from Tag where ParentTagId = '$parentTagId'";
+        $sql = "SELECT name from Tag where Parent_Tag_Id = '$parentTagId'";
 
        // $sql = "SELECT tagId FROM Tag WHERE name = '$parentTag'";
 
@@ -90,7 +106,7 @@ class Tags extends Database{
 
         $tags = [];
         while($row = $result->fetch_assoc()){
-            $tag = new Tag($row["Name"], $row["TagId"], $row["Category"], $row["ParentTagId"]);
+            $tag = new Tag($row["Name"], $row["Tag_id"], $row["Category"], $row["Parent_Tag_Id"]);
             array_push($tags,$tag);
         }
         return $tags;
@@ -98,18 +114,22 @@ class Tags extends Database{
 
     public function searchTagsByName($search_str){
 
-        $sql = "SELECT * FROM Tag WHERE Name '%.?.%'";
+        $sql = "SELECT * FROM Tag WHERE Name like '%$search_str%'";
+        $result = $this->getConnection()->query($sql);
 
-        $result = $this->getConnection()->prepare($sql);
+        // $result = $this->getConnection()->prepare($sql);
 
-        $result->execute([$search_str]);
+        // $result->execute([$search_str]);
 
-        $tags = $result->fetchAll();
+        // $tags = $result->fetchAll();
 
-        $json = [];
-        while($row = $tags->fetch_assoc()){
-            echo $row["Name"];
-            $json[] = $row["Name"];
+        $tagList = [];
+
+        while($row = $result->fetch_assoc()){
+            $tag = new Tag($row["Name"], $row["Tag_id"], $row["Category"], $row["Parent_Tag_Id"]);
+            array_push($tagList,$tag);
         }
+
+        return $tagList;
     }
 }

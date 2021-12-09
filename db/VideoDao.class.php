@@ -2,6 +2,8 @@
 
 include_once 'database.class.php';
 include_once 'model/Video.php';
+include_once 'model/Tag.php';
+include_once 'db/VideoTagDao.class.php';
 
 
 /**
@@ -38,12 +40,22 @@ class VideoDao extends Database{
         $type = $video->get_type();
         $current_date = date("Y-m-d");
 
+       
 
         $sql = "INSERT INTO Video(Title, Description,type, videocase_id, Modified_Date,Created_Date,url)
         VALUES('$title', '$description', '$type', '$videocaseid', '$current_date', '$current_date', '$url')";
 
         $result = $this->getConnection()->query($sql);
         $last_id = $this->getConnection()->insert_id;
+
+         // check if this video has tags
+         if(sizeof($video->get_tags())>0){
+             $tags = $video->get_tags();
+            $videoTagDao = new VideoTagDao();
+            foreach($tags as $tagName){
+                $videoTagDao->create($tagName, $last_id);
+            }
+        }
         return $last_id;
     }
 

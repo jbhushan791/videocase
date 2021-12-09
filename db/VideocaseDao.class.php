@@ -39,7 +39,8 @@ class VideocaseDao extends Database {
         $title = $videocase->get_title();
         $description = $videocase->get_description();
 
-        $sql = "INSERT INTO Videocase (Title, Description, CreatedDate, ModifiedDate, Presenter_id)
+
+        $sql = "INSERT INTO Videocase (Title, Description, Created_Date, Modified_Date, Presenter_id)
         VALUES ('$title', '$description', '$current_date' ,'$current_date', '$presenterId')";
 
         $result = $this->getConnection()->query($sql);
