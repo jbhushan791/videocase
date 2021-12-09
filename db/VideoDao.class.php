@@ -39,8 +39,6 @@ class VideoDao extends Database{
         $current_date = date("Y-m-d");
 
 
-        echo $videocaseid;
-
         $sql = "INSERT INTO Video(Title, Description,type, videocase_id, Modified_Date,Created_Date,url)
         VALUES('$title', '$description', '$type', '$videocaseid', '$current_date', '$current_date', '$url')";
 

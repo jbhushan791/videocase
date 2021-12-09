@@ -31,22 +31,20 @@
                 $result = $videcaseDao->getAll();
                 foreach($result as $case) {
                 ?>
-                    <!-- <div class="row tv-service-section-row"> -->
-                        <div class="col-xl-4 col-md-6 tv-sm-center">
-                            <article class="tv-icon-box">
-                                <div class="tv-box-top">
-                                    <div class="tv-box-icon"><span class="ti-user"></span></div>
-                                    <div class="tv-box-header">
-                                        <h5><a href="#"><?php $case->get_title(); ?></a></h5>
-                                    </div>
+                    <div class="col-xl-4 col-md-6 tv-sm-center">
+                        <article class="tv-icon-box">
+                            <div class="tv-box-top">
+                                <div class="tv-box-icon"><span class="ti-user"></span></div>
+                                <div class="tv-box-header">
+                                    <h5><a href="#"><?php echo $case->get_title(); ?></a></h5>
                                 </div>
-                                <div class="tv-divider"></div>
-                                <div class="tv-box-body">
-                                    <p><?php $case->get_description(); ?></p>
-                                </div>
-                            </article>
-                        </div>
-                    <!-- </div> -->
+                            </div>
+                            <div class="tv-divider"></div>
+                            <div class="tv-box-body">
+                                <p><?php echo $case->get_description(); ?></p>
+                            </div>
+                        </article>
+                    </div>
                 <?php
                 }
                 ?>

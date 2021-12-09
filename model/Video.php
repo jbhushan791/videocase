@@ -3,7 +3,7 @@
 /**
  * Data Model for Video
  */
-class Video{
+class Video {
 
     private $videoId;
     private $title;
@@ -47,7 +47,7 @@ class Video{
     }
 
     function set_videocaseId($videocaseId) {
-        $this->url = $videocaseId;
+        $this->videocaseId = $videocaseId;
     }
 
     function get_sequence() {
