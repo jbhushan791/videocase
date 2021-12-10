@@ -29,6 +29,22 @@ class VideocaseDao extends Database {
         return $videocases;
     }
 
+    public function getAllByTitle($searchStr){
+        $videocases = [];
+        if($searchStr != ""){
+            $sql = "SELECT * FROM VIDEOCASE WHERE TITLE LIKE '%$searchStr%'";
+        } else {
+            $sql = "SELECT * FROM VIDEOCASE";
+        }
+        $result = $this->getConnection()->query($sql);  
+        while($row = $result->fetch_assoc()){
+            $videocases[] = $row;
+            // $videocase = new Videocase($row["Title"], $row["Description"]);
+            // array_push($videocases,$videocase);
+        }
+        return $videocases;
+    }
+
 
     public function create($videocase, $presenter, $videos){
 
