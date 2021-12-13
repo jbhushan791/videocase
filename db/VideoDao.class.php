@@ -22,10 +22,10 @@ class VideoDao extends Database {
 
         $videos = [];
         while($row = $result->fetch_assoc()){
-            $video = new Video($row["Title"], $row["type"], $row["description"], $row["url"]);
+            $video = new Video($row["Title"], $row["type"], $row["Description"], $row["url"]);
             $video->set_videoId($row["video_id"]);
-            $video->set_likes($row["likes"]);
-            $video->set_sequence($row["sequence"]);
+            $video->set_likes($row["Likes"]);
+            $video->set_sequence($row["Sequence"]);
             $video->set_videocaseId($row["videocase_id"]);
             array_push($videos,$video);
         }
