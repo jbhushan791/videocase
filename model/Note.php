@@ -10,8 +10,7 @@ class Note{
     private $text;
     private $userId;
 
-    function __construct($noteId, $videoId, $text, $userId) {
-        $this->noteId = $noteId;
+    function __construct($videoId, $text, $userId) {
         $this->videoId = $videoId;
         $this->text = $text;
         $this->userId = $userId;
@@ -20,6 +19,11 @@ class Note{
     function get_noteId() {
         return $this->noteId;
     }
+
+    function set_noteId($noteId){
+        $this->noteId = $noteId;
+    }
+   
 
     function get_videoId() {
         return $this->videoId;

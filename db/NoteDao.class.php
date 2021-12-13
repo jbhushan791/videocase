@@ -1,7 +1,7 @@
 <?php
 
 include_once 'database.class.php';
-include_once 'model/User.php';
+include_once 'model/Note.php';
 
 /**
  * This class deals with all database operation related to Note
@@ -26,7 +26,8 @@ class NoteDao extends Database{
 
         $notes = [];
         while($row = $result->fetch_assoc()){
-            $note = new Note($row["note_id"], $row["video_id"], $row["text"], $row["user_id"]);
+            $note = new Note($row["video_id"], $row["text"], $row["user_id"]);
+            $note->set_noteId($row['note_id']);
             array_push($notes,$note);
         }
         return $notes;

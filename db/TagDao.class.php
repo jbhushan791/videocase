@@ -132,4 +132,22 @@ class TagDao extends Database {
 
         return $tagList;
     }
+
+    public function getVideoTags($videoId){
+
+        $sql = "SELECT * from VideoTag vt
+                INNER JOIN Tag t on vt.tag_id = t.tag_id
+                WHERE vt.video_id='$videoId'";
+        
+        $result = $this->getConnection()->query($sql);
+
+        $tags = [];
+
+        while($row = $result->fetch_assoc()){
+            $tag = new Tag($row["Name"], $row["Tag_id"], $row["Category"], $row["Parent_Tag_Id"]);
+            array_push($tags,$tag);
+        }
+
+        return $tags;
+    }
 }

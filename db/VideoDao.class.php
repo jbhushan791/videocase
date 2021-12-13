@@ -4,6 +4,10 @@ include_once 'database.class.php';
 include_once 'model/Video.php';
 include_once 'model/Tag.php';
 include_once 'db/VideoTagDao.class.php';
+include_once 'db/TagDao.class.php';
+include_once 'model/VideoInfo.php';
+include_once 'model/Note.php';
+include_once 'db/NoteDao.class.php';
 
 
 /**
@@ -30,6 +34,38 @@ class VideoDao extends Database {
             array_push($videos,$video);
         }
         return $videos;
+    }
+
+    /**
+     * This function returns video details for given video id
+     */
+    public function get_details( $userId, $videoId){
+
+        $sql1 = "SELECT * FROM VIDEO WHERE video_id = $videoId";
+
+        $result = $this->getConnection()->query($sql1);
+
+        $videos = [];
+        while($row = $result->fetch_assoc()){
+            $video = new Video($row["Title"], $row["type"], $row["Description"], $row["url"]);
+            $video->set_videoId($row["video_id"]);
+            $video->set_likes($row["Likes"]);
+            $video->set_sequence($row["Sequence"]);
+            $video->set_videocaseId($row["videocase_id"]);
+        }
+
+        
+        // get tag information
+        $tagDao = new TagDao();
+        $tags = $tagDao->getVideoTags($videoId);
+
+        // get note information
+        $noteDao = new NoteDao();
+        $notes = $noteDao->getAll($userId, $videoId);
+
+        $videoInfo = new VideoInfo($video, $notes, $tags);
+
+        return $videoInfo;
     }
 
     /**

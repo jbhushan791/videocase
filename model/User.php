@@ -24,6 +24,11 @@ class User {
         $this->description = $description;
     }
 
+    function get_user_id() {
+        return $this->user_id;
+    }
+
+
     function get_first_name() {
         return $this->first_name;
     }

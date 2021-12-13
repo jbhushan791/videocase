@@ -200,7 +200,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"> 
-                        <a href="#" target="_blank" class="card-title"><?php echo $video->get_title()?> </a>
+                        <a href="videodetail.php?id=<?php echo $video->get_videoId();?>" target="_blank" class="card-title"><?php echo $video->get_title()?> </a>
                     </h4>
                     <video width ="300" height = "200" controls autoplay>
                         <source src=<?php echo $video->get_url()?> type="video/mp4">
@@ -241,7 +241,7 @@
                         <source src=<?php echo $video->get_url()?> type="video/mp4">
                     </video>
                     <p class="card-text">
-                        <a href="#"><i class="material-icons icon">thumb_up</i></a><label><?php echo $video->get_likes()?></label>
+                        <a href="videodetail.php?id=<?php echo $video->get_videoId();?>"><i class="material-icons icon">thumb_up</i></a><label><?php echo $video->get_likes()?></label>
                     </p>
                 </div>
             </div>
