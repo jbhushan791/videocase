@@ -7,8 +7,12 @@
 	$showError = false;
 	$exists=false;
 
-	$email = $_POST["email"];
-	$pass1 = $_POST["password"];
+	if(isset($_POST['email'])){
+	    $email = $_POST["email"];
+    }
+    if(isset($_POST['password'])){
+	    $pass1 = $_POST["password"];
+    }
 
     if(isset($_POST["submit"])){
         $result = $userDAO->login($email, $pass1);
@@ -19,6 +23,7 @@
             //echo $result->get_first_name();
             $_SESSION['user'] = serialize($result);
             header("location: /videocase/home.php");
+            // header("location: /home.php");
         }
     }
 	
