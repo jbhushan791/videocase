@@ -17,17 +17,13 @@ if(isset($_POST['title'])){
     $videos = [];
     $tag_ids = [];
 
-  
-    // foreach( $tag_ids as $id){
-    //   print_r($id);
-    // }
 
     //classroom video info
     $target_dir = "uploads/";
 
     $target_classroom_video = $target_dir . $_FILES['cvideo']['name'];
     $classroom_video1 = new Video($_POST['title'], 'Classroom', $_POST['description'], $target_classroom_video );
-    // $classroom_video1->set_tags($_POST['tags']);
+   
     $array = explode(',', $_POST['tags']);
     $classroom_video1->set_tags($array);
    
@@ -51,6 +47,8 @@ if(isset($_POST['title'])){
     move_uploaded_file($_FILES['pre-video']['tmp_name'], $target_pre_interview);
     move_uploaded_file($_FILES['post-video']['tmp_name'], $target_post_interview);
     $result = $videcaseDao->create($videocase,$presenter, $videos);
+
+    header("location: /admin.php");
     
 }
 ?>
@@ -160,22 +158,15 @@ function processPhase3(){
     _("phase4").style.display = "block";
 		_("progressBar").value = 75;
 		_("status").innerHTML = "Phase 4 of 4";
-	// interviewType = _("interview-type").value;
-	// if(interviewType.length > 0){
-	// 	_("phase3").style.display = "none";
-  //       _("phase4").style.display = "block";
-	// 	_("progressBar").value = 75;
-	// 	_("status").innerHTML = "Phase 4 of 4";
-	// } else {
-	//     alert("Please choose interview type");	
-	// }
 }
+
 function processPhase4(){
     _("phase4").style.display = "none";
     _("show_all_data").style.display = "block";
     _("progressBar").value = 100;
     _("status").innerHTML = "Phase 4 of 4";
 }
+
 function updateTags(tag){
   _("tags").value = tag;
   document.cookie = "tags =tag";
@@ -211,7 +202,7 @@ function submitForm(){
 			  <input type="text" name="tags" id = "tags" placeholder="Tags" class="typeahead tm-input form-control tm-input-info"/>
         <div class="file-upload-wrapper">
         <input type="file" accept="video/*" name="cvideo" /> <br><br>
-    </div>
+        </div>
         <button onclick="processPhase2()">Continue</button>
   </div>
   <div id="phase3">
@@ -265,16 +256,10 @@ function submitForm(){
       },
       afterSelect :function (item){
         tagApi.tagsManager("pushTag", item);
-        // console.log(tagApi.tagsManager("tags"));
         updateTags(tagApi.tagsManager("tags"));
-        // tag_ids.push(item);
       }
     });
-    // console.log(tagApi.tagsManager("tags"));
-    
-    //print_r(tagApi.tagList());
   });
-  
 </script>
 </body>
 </html>

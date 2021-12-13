@@ -65,7 +65,7 @@ $result = $videcaseDao->getAll();
                             <div class="tv-box-top">
                                 <div class="tv-box-icon"><span class="ti-user"></span></div>
                                 <div class="tv-box-header">
-                                    <h5><a href="#"><?php echo $case->get_Title(); ?></a></h5>
+                                    <h5><a href="casedetails.php?id=<?php echo $case->get_videocaseId();?>"><?php echo $case->get_Title(); ?></a></h5>
                                 </div>
                             </div>
                             <div class="tv-divider"></div>

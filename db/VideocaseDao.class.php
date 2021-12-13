@@ -24,7 +24,26 @@ class VideocaseDao extends Database {
         $videocases = [];
         while($row = $result->fetch_assoc()){
             $videocase = new Videocase($row["Title"], $row["Description"]);
+            $videocase->set_videocaseId($row["Videocase_id"]);
             array_push($videocases,$videocase);
+        }
+        return $videocases;
+    }
+
+    public function get($id){
+
+        $sql = "SELECT * FROM VIDEOCASE v
+                INNER JOIN PRESENTER p
+                ON v.presenter_id = p.presenter_id
+                where v.videocase_id = '$id'";
+
+        $result = $this->getConnection()->query($sql);
+
+        $videocases;
+        while($row = $result->fetch_assoc()){
+            $videocases = $row;
+          //  $videocase = new Videocase($row["Title"], $row["Description"]);
+           // array_push($videocases,$videocase);
         }
         return $videocases;
     }

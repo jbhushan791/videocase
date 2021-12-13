@@ -9,16 +9,37 @@ include_once 'db/VideoTagDao.class.php';
 /**
  * This class deals with all database operation related to Video
  */
-class VideoDao extends Database{
+class VideoDao extends Database {
 
     /**
      * This function returns all videos for given videocase
      */
     public function getAll($videocaseId){
 
-        $sql = "SELECT * FROM VIDEO WHERE videocase_id = '$videocaseId'";
+        $sql = "SELECT * FROM VIDEO WHERE videocase_id = $videocaseId";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->getConnection()->query($sql);
+
+        $videos = [];
+        while($row = $result->fetch_assoc()){
+            $video = new Video($row["Title"], $row["type"], $row["description"], $row["url"]);
+            $video->set_videoId($row["video_id"]);
+            $video->set_likes($row["likes"]);
+            $video->set_sequence($row["sequence"]);
+            $video->set_videocaseId($row["videocase_id"]);
+            array_push($videos,$video);
+        }
+        return $videos;
+    }
+
+    /**
+     * This function returns all videos for given videocase
+     */
+    public function getAllByType($videocaseId, $type){
+
+        $sql = "SELECT * FROM VIDEO WHERE videocase_id = '$videocaseId' and type = '$type";
+
+        $result = $this->getConnection()->query($sql);
 
         $videos = [];
         while($row = $result->fetch_assoc()){
@@ -40,7 +61,6 @@ class VideoDao extends Database{
         $type = $video->get_type();
         $current_date = date("Y-m-d");
 
-       
 
         $sql = "INSERT INTO Video(Title, Description,type, videocase_id, Modified_Date,Created_Date,url)
         VALUES('$title', '$description', '$type', '$videocaseid', '$current_date', '$current_date', '$url')";

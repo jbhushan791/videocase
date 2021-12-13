@@ -23,6 +23,10 @@ class Video {
         $this->url = $url;
       }
 
+    function set_videoId($videoId) {
+        $this->videoId = $videoId;
+    }
+
     function get_videoId() {
         return $this->videoId;
     }
@@ -60,8 +64,16 @@ class Video {
         $this->tags = $tags;
     }
 
+    function set_sequence($sequence) {
+        $this->sequence = $sequence;
+    }
+
     function get_sequence() {
         return $this->sequence;
+    }
+
+    function set_likes($likes) {
+        $this->likes = $likes;
     }
 
     function get_likes() {

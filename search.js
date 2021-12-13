@@ -80,7 +80,21 @@ function viewSearchResult(result){
         article.appendChild(para_desc);
         dataviewer.appendChild(article);
     }
+}
 
+function navigate(videocaseId){
+    console.log(videocaseId);
+    fetch('v.php', {
+        method: 'POST',
+        body: new URLSearchParams('caseid=' + videocaseId)
+    })
+    .then(res => res.json())
+   .then(res => viewVideocase(res))
+    .catch(e => console.error('Error: ' +e))
+    
+}
 
+function viewVideocase(result){
+    
 }
 

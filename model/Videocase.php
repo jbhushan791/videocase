@@ -24,6 +24,14 @@ class Videocase{
         return $this->description;
     }
 
+    function set_videocaseId($videocaseId) {
+        $this->videocaseId = $videocaseId;
+    }
+    
+    function get_videocaseId() {
+        return $this->videocaseId;
+    }
+
     
 }
 
