@@ -42,6 +42,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" type="text/css" href="style/video.css">
 </head>
 <header>
@@ -68,6 +69,11 @@
                 <source src=<?php echo $v->get_url() ?>  type="video/mp4">
             </video>
         <div>
+        <div class = "tags-list"> Tags: 
+            <?php foreach($tags as $t) {?>
+                   <div class=" t w3-padding-8 w3-small w3-blue w3-circle w3-center"><?php echo $t->get_name() ?></div>
+            <?php } ?>
+        </div>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#overview">
