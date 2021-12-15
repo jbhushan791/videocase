@@ -20,10 +20,12 @@
            
         } else {
             session_start();
-            //echo $result->get_first_name();
             $_SESSION['user'] = serialize($result);
-            header("location: /videocase/home.php");
-            // header("location: /home.php");
+             /**
+             * Enable following in non dev env (test and prod)
+             */
+           header("location: /videocase/landing.php");
+           // header("location: /landing.php");
         }
     }
 	

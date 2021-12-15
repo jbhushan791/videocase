@@ -3,12 +3,13 @@
 <head>
     <title>filter</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script> -->
     <link rel="stylesheet" href="dist/style.min.css" />
     <script src="dist/jstree.min.js"></script>  
 </head>
 <body>
-    <div id="tree-container"></div>
+<div id="tree-container"></div>
 <script type="text/javascript">
 $(document).ready(function(){
     //fill data to tree  with AJAX call

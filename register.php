@@ -18,7 +18,11 @@
         $user_type = $_POST["user_type"];
         $result = $userDAO->register($fname, $lname, $email, $pass1, $user_type, $affiliation, $description);
         if($result == 1) {
-           header("location: /videocase/home.php");
+        /**
+         * Use this in non dev environment
+         */
+        header("location: /videocase/landing.php");
+        //header("location: /landing.php");
         }
     }
     
