@@ -55,7 +55,7 @@
           <?php include 'home.php'; ?>
       </div>
       <div id="videocaselist" class="container tab-pane fade"><br>
-          <?php include './VideocaseList.php'; ?>
+          <?php include('./VideocaseList.php'); ?>
       </div>
   </div>
   <!-- Modal -->
