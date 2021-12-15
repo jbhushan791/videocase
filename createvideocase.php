@@ -48,7 +48,8 @@ if(isset($_POST['title'])){
     move_uploaded_file($_FILES['post-video']['tmp_name'], $target_post_interview);
     $result = $videcaseDao->create($videocase,$presenter, $videos);
 
-    header("location: /VideocaseList.php");
+    header("location: /videocase/landing.php");
+    //header("location: /landing.php");
     
 }
 ?>
@@ -174,7 +175,7 @@ function updateTags(tag){
 
 function submitForm(){
 	_("multiphase").method = "post";
-	_("multiphase").action = "Createvideocase.php";
+	_("multiphase").action = "createvideocase.php";
 	_("multiphase").submit();
 }
 </script>
