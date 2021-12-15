@@ -46,16 +46,7 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#videocaselist">Videocases</a>
         </li>
-        <?php
-          if(isset($_SESSION["user"])) {
-            $user = unserialize($_SESSION["user"]);
-            if($user->get_role() == "Admin"){
-              echo "<li class='nav-item'>";
-              echo "<a class='nav-link' data-toggle='tab' href='#admin'>Admin Page</a>";
-              echo "<li>";
-            }
-          }
-        ?>
+       
         
         
         <!-- <li class="nav-item">
@@ -76,7 +67,7 @@
           <?php include 'main.php'; ?>
       </div>
       <div id="videocaselist" class="container tab-pane fade"><br>
-          <?php include 'videocaselist.php'; ?>
+          <?php include 'admin.php'; ?>
       </div>
       <div id="presenter" class="container tab-pane fade"><br>
           <?php include 'presenter.php'; ?>

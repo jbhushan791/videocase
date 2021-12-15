@@ -49,7 +49,13 @@ $result = $videcaseDao->getAll();
         <div class="service-section section-tb-padd-100" style="background: #red">
             <div class="hcreate">
                 <h3>Videocases</h3>
-                <a href="createvideocase.php" target="_blank" class="card-title"><button>Add new</button></a>
+                <?php
+                if(isset($_SESSION["user"])) {
+                    $user = unserialize($_SESSION["user"]);
+                    if($user->get_role() == "Admin"){
+                ?>
+                </a href="createvideocase.php" target="_blank" class="card-title"><button>Add new</button></a>
+                <?php }}?>
             </div>
             <input type="text" name="search" placeholder="Search by title.." id="searchBox" oninput=search(this.value)>
             <br>

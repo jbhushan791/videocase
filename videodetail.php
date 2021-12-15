@@ -83,6 +83,7 @@
             <?php
                 if(isset($_SESSION["user"])) {
                     $user = unserialize($_SESSION["user"]);
+                    if($user->get_role() == "User"){
             ?>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#notes">
@@ -90,7 +91,7 @@
                 Notes
                 </a>
             </li>   
-            <?php } ?>
+            <?php }}?>
         </ul>
     </div> 
      <!-- Tab panes -->
